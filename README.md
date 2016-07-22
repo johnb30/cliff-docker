@@ -5,6 +5,10 @@ A Docker image for the [CLIFF](http://cliff.mediameter.org/) 2.1.1 geolocation s
 Use
 ---
 
+**Note: CLAVIN, and by extension CLIFF, is very memory hungry due to the
+geonames index. To properly run, a minimum of 4GB of RAM is necessary. Any less
+and you'll experience errors.**
+
 Build using
 
 ```
