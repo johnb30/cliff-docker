@@ -1,0 +1,10 @@
+FROM maven:3.5.3-jdk-7
+
+RUN git clone https://github.com/Berico-Technologies/CLAVIN.git && \
+        cd CLAVIN && \
+        wget http://download.geonames.org/export/dump/allCountries.zip && \
+        unzip allCountries.zip && \
+        mvn compile && \
+        MAVEN_OPTS="-Xmx4g" mvn exec:java -Dexec.mainClass="com.bericotech.clavin.index.IndexDirectoryBuilder"
+
+CMD ["/bin/bash"]
