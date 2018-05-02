@@ -1,0 +1,18 @@
+FROM tomcat:7.0
+
+ARG CLIFF_VERSION=2.3.0
+
+RUN sed -i "s/httpredir.debian.org/`curl -s -D - http://httpredir.debian.org/demo/debian/ | awk '/^Link:/ { print $2 }' | sed -e 's@<http://\(.*\)/debian/>;@\1@g'`/" /etc/apt/sources.list && \ 
+    apt-get clean && apt-get update && \
+    apt-get install -y git openjdk-7-jdk openjdk-7-doc openjdk-7-jre-lib maven
+
+RUN wget https://github.com/mitmedialab/CLIFF/releases/download/v$CLIFF_VERSION/CLIFF-$CLIFF_VERSION.war -O /usr/local/tomcat/webapps/CLIFF-$CLIFF_VERSION.war
+
+COPY conf/tomcat-users.xml ./conf/tomcat-users.xml
+COPY conf/settings.xml ./conf/settings.xml
+
+EXPOSE 8080
+
+VOLUME /etc/cliff2/IndexDirectory
+
+CMD $CATALINA_HOME/bin/catalina.sh run
