@@ -11,13 +11,13 @@ and you'll experience errors.**
 
 This docker image uses a build and release workflow. The Lucene index is built
 using the `build_server` image. The index is then copied to the host and can be
-mounted as a voulme to the actual CLIFF server container.
+mounted as a volume to the actual CLIFF server container.
 
 Build the index with:
 ```
 make buildindex
 ```
-This step bulds the index and copis it to the host using the
+This step builds the index and copies it to the host using the
 `HOST_INDEX_LOCATION` variable. The default location is
 `/etc/cliff2/IndexDirectory`.
 
